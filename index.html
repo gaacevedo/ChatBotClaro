@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Soporte Técnico | Claro</title>
+    <style>
+        /* Estilos base del portal */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #ef3829; /* Rojo Claro */
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Estenedor del Chat */
+        #chat-window {
+            height: 500px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        /* Cabecera del chat */
+        .chat-header {
+            background: #333;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #webchat {
+            height: calc(100% - 40px);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Centro de Soluciones Inteligentes</h1>
+    </header>
+
+    <div class="container">
+        <h2>Hola, ¿en qué podemos ayudarte hoy?</h2>
+        <p>Nuestro asistente virtual puede ayudarte con saldos, fallas técnicas y estado de pedidos de inmediato.</p>
+
+        <div id="chat-window">
+            <div class="chat-header">Asistente Virtual Claro</div>
+            <div id="webchat" role="main"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    
+    <script>
+        // Configuración de la conexión
+        // IMPORTANTE: Reemplaza 'TU_DIRECT_LINE_SECRET' con el secreto que obtienes en el portal de Azure
+        const directLineSecret = 'TU_DIRECT_LINE_SECRET';
+
+        window.WebChat.renderWebChat(
+            {
+                directLine: window.WebChat.createDirectLine({
+                    token: directLineSecret
+                }),
+                styleOptions: {
+                    // Personalización de colores para Claro
+                    bubbleBackground: '#f0f0f0',
+                    bubbleFromUserBackground: '#ef3829',
+                    bubbleFromUserTextColor: 'white',
+                    botAvatarInitials: 'CL',
+                    accent: '#ef3829'
+                },
+                locale: 'es-ES'
+            },
+            document.getElementById('webchat')
+        );
+    </script>
+</body>
+</html>
